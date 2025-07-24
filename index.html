@@ -1073,55 +1073,49 @@
 <meta charset="UTF-8" />
 <title>图片布局测试</title>
 <style>
-/* 替换现有样式，将ul定义为Flex布局 */
+/* 主容器，确保每个li中的内容横排 */
 .thumbnail-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* 间距可调节 */
-  margin: 0 -5px; /* 让margin补偿gap */
+  gap: 10px; /* 控制间距 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .thumbnail-group > li {
-  flex: 1 1 calc(25% - 10px); /* 4列 */
+  display: flex;
+  flex-direction: column; /* 初始化为列排（图片上文字下） */
+  width: 23%; /* 四列布局 */
   box-sizing: border-box;
-  padding: 5px;
 }
 
+/* 小屏幕改为两列 */
 @media(max-width: 768px) {
   .thumbnail-group > li {
-    flex: 1 1 calc(50% - 10px); /* 2列 */
+    width: 48%;
   }
 }
-
-/* 图片保持自适应 */
+/* 让图片宽度自适应，保持比例 */
 .thumbnail-group > li a img {
-  width: 100%;
-  height: auto; /* 或指定固定高度 */
-  display: block;
-  object-fit: cover; /* 自动裁剪维持比例 */
+  width: 100%; /* 占满容器宽度 */
+  height: auto; /* 保持比例 */
+  display: block; /* 去除底部空隙 */
+  object-fit: cover; /* 裁剪图片，避免拉伸 */
+  max-height: 150px; /* 可选，限制图片高度 */
 }
-	/* 使用Flexbox布局，保证图片和文字在一行 */
-li {
-  display: flex;
-  flex-direction: column; /* 或 row，根据需求 */
-}
-
-/* 让图片自适应宽度 */
-a img {
-  width: 100%;
-  height: auto;
-}
-
 .video-info {
-  flex: 1; /* 让文字区域占剩余空间 */
-  overflow: hidden; /* 防止溢出影响布局 */
+  margin-top: 8px;
+  width: 100%;
 }
 
-/* 限制标题最大显示一行 */
+/* 标题只占一行，超出隐藏显示省略 */
 .video-info h5 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -3086,6 +3080,3 @@ $("img.lazy").lazyload({
 
 </body>
 </html>
-
-
-
