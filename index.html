@@ -1100,16 +1100,28 @@
   display: block;
   object-fit: cover; /* 自动裁剪维持比例 */
 }
-	.video-info {
-  max-width: 200px; /* 适当调整宽度 */
+	/* 使用Flexbox布局，保证图片和文字在一行 */
+li {
+  display: flex;
+  flex-direction: column; /* 或 row，根据需求 */
 }
 
+/* 让图片自适应宽度 */
+a img {
+  width: 100%;
+  height: auto;
+}
+
+.video-info {
+  flex: 1; /* 让文字区域占剩余空间 */
+  overflow: hidden; /* 防止溢出影响布局 */
+}
+
+/* 限制标题最大显示一行 */
 .video-info h5 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block;
-  margin: 0;
 }
 </style>
 </head>
